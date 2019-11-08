@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <!--
+  This sample removes the class: android.support.v4.content.AsyncTaskLoader.LoadTask:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='AsyncTaskLoader.LoadTask']" />
+  
+  This sample removes the method: android.support.v4.content.CursorLoader.loadInBackground:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='CursorLoader']/method[@name='loadInBackground']" />
+  -->
+    <remove-node path="/api/package[@name='com.bumptech.glide.load.data']" />
+    <remove-node path="/api/package[@name='com.bumptech.glide']" />
+    <remove-node path="/api/package[@name='com.bumptech.glide.load.resource.bitmap']" />
+    <remove-node path="/api/package[@name='com.bumptech.glide.request.transition']" />
+    <remove-node path="/api/package[@name='com.bumptech.glide.request.target']" />
+    <remove-node path="/api/package[@name='com.bumptech.glide.load.engine.bitmap_recycle']" />
+    <remove-node path="/api/package[@name='com.bumptech.glide.load.engine']" />
+    <remove-node path="/api/package[@name='com.bumptech.glide.load.engine.executor']" />
+    <remove-node path="/api/package[@name='com.bumptech.glide.load.data.mediastore']" />
+    <remove-node path="/api/package[@name='com.bumptech.glide.load.model']" />
+</metadata>
