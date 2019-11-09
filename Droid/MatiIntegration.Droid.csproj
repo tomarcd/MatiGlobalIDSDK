@@ -45,20 +45,6 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MatiGlobalIDSDK.Droid\MatiGlobalIDSDK.Droid.csproj">
-      <Project>{B342F4A1-942E-437C-9189-CC8FFC823C33}</Project>
-      <Name>MatiGlobalIDSDK.Droid</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\glideAndroid\glideAndroid.csproj">
-      <Project>{C620A18A-DDDE-4E81-A130-66608368E1E1}</Project>
-      <Name>glideAndroid</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\mixpanelAndroid\mixpanelAndroid.csproj">
-      <Project>{888FFFA3-1EC6-44FC-B3E7-2A79A1DF49A2}</Project>
-      <Name>mixpanelAndroid</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -123,6 +109,12 @@
     <PackageReference Include="Xamarin.AndroidX.Legacy.Support.V4">
       <Version>1.0.0-preview02</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MatiGlobalIDSDK.Droid\MatiGlobalIDSDK.Droid.csproj">
+      <Project>{B342F4A1-942E-437C-9189-CC8FFC823C33}</Project>
+      <Name>MatiGlobalIDSDK.Droid</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

@@ -56,7 +56,14 @@
     <TransformFile Include="Transforms\EnumMethods.xml" />
   </ItemGroup>
   <ItemGroup>
-    <LibraryProjectZip Include="Jars\mati-global-id-sdk-2.2.0.aar" />
+    <LibraryProjectZip Include="Jars\mati-global-id-sdk-2.3.4.aar" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedReferenceJar Include="Jars\annotations-4.9.0.jar" />
+    <EmbeddedReferenceJar Include="Jars\disklrucache-4.9.0.jar" />
+    <EmbeddedReferenceJar Include="Jars\jetified-gifdecoder-4.9.0.jar" />
+    <EmbeddedReferenceJar Include="Jars\jetified-glide-4.9.0.jar" />
+    <EmbeddedReferenceJar Include="Jars\jetified-mixpanel-android-5.4.3.jar" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
