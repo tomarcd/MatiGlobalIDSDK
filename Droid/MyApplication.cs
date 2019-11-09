@@ -14,6 +14,7 @@ namespace MatiIntegration.Droid
         public override void OnCreate()
         {
             base.OnCreate();
+
             Mati.Init(this, "5dc09bd3047ea0001c4b20ba"); //your client ID here
         }
     }

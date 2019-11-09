@@ -56,11 +56,6 @@
     <TransformFile Include="Transforms\EnumMethods.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.GooglePlayServices.Gcm">
-      <Version>71.1600.0</Version>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
     <LibraryProjectZip Include="Jars\mati-global-id-sdk-2.2.0.aar" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />

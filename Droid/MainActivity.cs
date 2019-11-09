@@ -1,5 +1,6 @@
 ﻿using System;
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
@@ -28,13 +29,19 @@ namespace MatiIntegration.Droid
             fab.Click += FabOnClick;
 
             Metadata metadata = new Metadata.Builder()
-                .With("userId", "Your Client ID")
+                .With("userId", "5dc09bd3047ea0001c4b20ba") //your client ID here
                 .With("type", 2)
                 .Build();
 
             Mati.Instance.SetMetadata(metadata);
 
             MatiLoginManager.Instance.RegisterCallback(mCallbackManager, this);
+        }
+
+        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            mCallbackManager.OnActivityResult(requestCode, (int)resultCode, data);
         }
 
         public void OnCancel()
