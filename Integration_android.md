@@ -1,90 +1,83 @@
-# Mati Xamarin iOS SDK documentation
+# Mati Android SDK documentation
 
-![alt text](https://github.com/MatiFace/mati-global-id-sdk/blob/master/Group%2011-1.png)
+Our SDK requires Android v5.0 (API v21) or above.
+
+![alt text](https://github.com/MatiFace/mati-global-id-sdk-android/blob/master/Group%2011.png?raw=true)
 
 ## Project configurations
 
-Create a Xamarin IOS native or Xamarin forms.
-Add a reference to MatiGlobalIDSDK.IOS bidding project.
+Create a Xamarin Android native or Xamarin forms.
+Your MainActivity should implement AppCompatActivity for native or FormsAppCompatActivity for forms.
+Add a reference to MatiGlobalIDSDK.Droid bidding project.
 If you are using xamarin forms a custom render will be required to display the KYC Button.
 
-## AppDelegate - Mati KYC Initialisation
+## Androidx Support Libraries
 
-Make the following changes in your AppDelegate.cs file
+Mati Android SDK requires Androidx Support libraries, legacy version of the support library will have to be migrated to the new version via bytecode replacement. This can be done by add "Xamarin.AndroidX.Migration" using nuget, currently this feature is in preview, if you don't see a listing please select "Show pre-release packages". After this, the first execution of the app should return a list of additional packages needed to transition to Androidx.
 
-### c
+For more detail about Androidx migration please refer to the link below.
+![alt text](https://devblogs.microsoft.com/xamarin/androidx-for-xamarin/)
 
-    using MatiGlobalIDSDK;
+## Mati SDK initialization
 
-    public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+In the onCreate() method of your application class, initialize Mati by calling the following line of code:
+
+    [Application]
+    public class MyApplication : Application
     {
-        // Override point for customization after application launch.
-        // If not required for your application you can safely delete this method
-        NSDictionary metadata = null;
-        MFKYC.RegisterWithClientId("{custom_token}", metadata);
-        return true;
-    }
+        public MyApplication(IntPtr javaReference, Android.Runtime.JniHandleOwnership transfer) : base(javaReference, transfer)
+        {
+        }
 
+        public override void OnCreate()
+        {
+            base.OnCreate();
+
+            Mati.Init(this, "your client ID here");
+        }
+    }
 
 ## Mati KYC Button Placement (UI)
 
-You now need to place the Mati KYC button inside your App. You have 2 options for that (interface builder vs. code):
+You now need to place the Mati KYC button inside your App. Add it to your layout XML file:
 
-You can include `MFKYCButton` into your view using XCode interface builder under the class name `_TtC15MatiGlobalIDSDK11MFKYCButton`
-Or
-Add using C#
+    <com.matilock.mati_kyc_sdk.MatiLoginButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:text="Custom"/>
 
-### c
+## Metadata
 
-    MFKYC.Instance.Metadata = NSDictionary.FromObjectAndKey((NSString)"key", (NSString)"value");
-    MFKYCButton matiButton = new MFKYCButton
+Choose what kind of metadata you want to receive as shown in example below.
+
+     Metadata metadata = new Metadata.Builder()
+                .With("userId", "your client ID here")
+                .With("type", 2)
+                .Build();
+
+    Mati.Instance.SetMetadata(metadata);
+
+## Callback Registration
+
+In order to handle login responses create a callback manager by calling following code:
+
+    private MatiCallbackManager mCallbackManager = MatiCallbackManager.CreateNew();
+
+Now register callback to handle callback responses
+
+    //this can be the AppCompatActivity that implement IMatiCallback
+    //or
+    //any c# class that inherit from a descendant of Java.Lang.Object and that implement IMatiCallback
+    MatiLoginManager.Instance.RegisterCallback(mCallbackManager, this);
+
+And in your onActivityResult method, call mCallbackManager.onActivityResult to pass the login results to the MatiLoginManger
+
+    protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
     {
-        Frame = new CGRect(0, 50, 320, 60),//you can change position,width and height
-        Title = "Custom Title"
-    };
-    View.Add(matiButton);
-
-## Mati KYC Delegate
-
-Use the delegate functions below in order to handle the success / failure of each verification.
-
-### c
-
-    //Assign the controller of your choice to be the Mati button delegate
-    MFKYC.Instance.Delegate = new MyMFKYCDelegate();
-
-    class MyMFKYCDelegate : MFKYCDelegate
-    {
-        public override void MFKYCLoginSuccessWithIdentityId(string identityId)
-        {
-            Console.WriteLine("Mati Login Success");
-        }
-
-        public override void MFKYCLoginCancelled()
-        {
-            Console.WriteLine("Mati Login Failed");
-        }
+        base.OnActivityResult(requestCode, resultCode, data);
+        mCallbackManager.OnActivityResult(requestCode, (int)resultCode, data);
     }
 
-## Enabling Camera and Photo permissions
+## Mati Android SDK integration video
 
-The following permissions are needed to capture video and access the photo gallery.
-
-### Info.plist
-
-    <key>NSCameraUsageDescription</key>
-    <string>Mati needs access to your Camera</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>Mati needs access to your media library</string>
-
-### Requirements
-
-    iOS 9.0
-    Xcode 10.2
-    Swift 5.0
-
-For Xcode 10.1 and below, use [Version 2.3.13](https://github.com/MatiFace/mati-global-id-sdk/releases/tag/2.3.13)
-
-## Mati iOS SDK integration video
-
-[![Mati SDK integration demo video](https://img.youtube.com/vi/sPS7_QoFhpY/0.jpg)](https://www.youtube.com/watch?v=sPS7_QoFhpY)
+[![Mati SDK integration demo video](https://img.youtube.com/vi/qDBjiBwyVF8/0.jpg)](https://www.youtube.com/watch?v=qDBjiBwyVF8)
