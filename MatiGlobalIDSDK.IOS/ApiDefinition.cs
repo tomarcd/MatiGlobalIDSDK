@@ -176,13 +176,13 @@ namespace MatiGlobalIDSDK
     [BaseType(typeof(UIButton), Name = "_TtC15MatiGlobalIDSDK11MFKYCButton")]
     interface MFKYCButton
     {
-        
+
 
         [Export("title"), NullAllowed]
         String Title { get; set; }
 
         [Export("intrinsicContentSize")]
-        CGSize IntrinsicContentSize { get;}
+        CGSize IntrinsicContentSize { get; }
 
         [Export("layoutSubviews")]
         void layoutSubviews();
